@@ -489,11 +489,9 @@
     }
 
     resizeConfettiCanvas();
-    window.addEventListener("resize", resizeConfettiCanvas);
-    window.addEventListener("orientationchange", () => setTimeout(resizeConfettiCanvas, 150));
 
     const confettiInstance = confetti.create(confettiCanvas, {
-      resize: false,
+      resize: true,
       useWorker: true
     });
 
@@ -647,7 +645,6 @@
       // Stop creating new hearts
       clearInterval(heartInterval);
 
-      resizeConfettiCanvas();
       fullScreenConfetti();
 
       // Create extra hearts burst
