@@ -223,6 +223,7 @@
       display: none;
       margin-top: 18px;
       animation: pop .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      overflow: hidden;
     }
 
     .result h2 {
@@ -249,7 +250,8 @@
     }
 
     .fireworks {
-      width: min(380px, 90vw);
+      width: 100%;
+      max-width: 380px;
       margin: 16px auto;
       display: block;
       border-radius: 12px;
@@ -280,51 +282,8 @@
   <canvas id="confettiCanvas"></canvas>
 
   <main class="card">
-    <!-- ANIMAL WITH HEART -->
-    <svg class="art" id="artSvg" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="fur" x1="0" x2="1">
-          <stop offset="0" stop-color="#f7c7a1"/>
-          <stop offset="1" stop-color="#f2a97b"/>
-        </linearGradient>
-        <linearGradient id="heart" x1="0" x2="1">
-          <stop offset="0" stop-color="#ff4d7d"/>
-          <stop offset="1" stop-color="#ff1f68"/>
-        </linearGradient>
-      </defs>
-
-      <path id="floatingHeart" d="M250 50 C250 33 270 25 282 38
-               C294 25 314 33 314 50
-               C314 78 282 92 282 106
-               C282 92 250 78 250 50Z"
-            fill="url(#heart)"
-            style="transform-origin: 282px 70px; animation: heartBeat 1s ease-in-out infinite;">
-        <animateTransform
-          attributeName="transform"
-          type="scale"
-          values="1;1.1;1"
-          dur="1s"
-          repeatCount="indefinite"/>
-      </path>
-
-      <path d="M90 120 C90 70 140 40 190 60
-               C240 40 290 70 290 120
-               C290 180 240 210 190 210
-               C140 210 90 180 90 120Z"
-            fill="url(#fur)"/>
-
-      <path d="M110 92 L95 55 L140 78 Z" fill="#f2a97b"/>
-      <path d="M270 92 L285 55 L240 78 Z" fill="#f2a97b"/>
-
-      <circle id="eye1" cx="160" cy="130" r="8"/>
-      <circle id="eye2" cx="220" cy="130" r="8"/>
-
-      <path d="M190 144 C186 144 182 148 182 152
-               C182 160 190 164 190 170
-               C190 164 198 160 198 152
-               C198 148 194 144 190 144Z"
-            fill="#ff7aa2"/>
-    </svg>
+    <!-- CHARACTER CONTAINER -->
+    <div id="characterContainer"></div>
 
     <h1>Manno, Will you be my Valentine ❤️ ?</h1>
 
@@ -351,6 +310,112 @@
   </main>
 
   <script>
+    /* ---------- RANDOM CHARACTER SELECTION ---------- */
+    const characters = [
+      // Character 1: Bear
+      `<svg class="art" id="artSvg" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fur" x1="0" x2="1">
+            <stop offset="0" stop-color="#f7c7a1"/>
+            <stop offset="1" stop-color="#f2a97b"/>
+          </linearGradient>
+          <linearGradient id="heart" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff4d7d"/>
+            <stop offset="1" stop-color="#ff1f68"/>
+          </linearGradient>
+        </defs>
+        <path id="floatingHeart" d="M250 50 C250 33 270 25 282 38 C294 25 314 33 314 50 C314 78 282 92 282 106 C282 92 250 78 250 50Z" fill="url(#heart)" style="transform-origin: 282px 70px;">
+          <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M90 120 C90 70 140 40 190 60 C240 40 290 70 290 120 C290 180 240 210 190 210 C140 210 90 180 90 120Z" fill="url(#fur)"/>
+        <path d="M110 92 L95 55 L140 78 Z" fill="#f2a97b"/>
+        <path d="M270 92 L285 55 L240 78 Z" fill="#f2a97b"/>
+        <circle cx="160" cy="130" r="8"/>
+        <circle cx="220" cy="130" r="8"/>
+        <path d="M190 144 C186 144 182 148 182 152 C182 160 190 164 190 170 C190 164 198 160 198 152 C198 148 194 144 190 144Z" fill="#ff7aa2"/>
+        <path d="M165 155 Q190 168 215 155" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>`,
+
+      // Character 2: Cat
+      `<svg class="art" id="artSvg" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fur" x1="0" x2="1">
+            <stop offset="0" stop-color="#ffb4d4"/>
+            <stop offset="1" stop-color="#ff8fb8"/>
+          </linearGradient>
+          <linearGradient id="heart" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff4d7d"/>
+            <stop offset="1" stop-color="#ff1f68"/>
+          </linearGradient>
+        </defs>
+        <path id="floatingHeart" d="M250 50 C250 33 270 25 282 38 C294 25 314 33 314 50 C314 78 282 92 282 106 C282 92 250 78 250 50Z" fill="url(#heart)" style="transform-origin: 282px 70px;">
+          <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M110 100 L90 50 L130 90 Z" fill="url(#fur)"/>
+        <path d="M270 100 L290 50 L250 90 Z" fill="url(#fur)"/>
+        <ellipse cx="190" cy="130" rx="80" ry="70" fill="url(#fur)"/>
+        <circle cx="165" cy="125" r="8"/>
+        <circle cx="215" cy="125" r="8"/>
+        <ellipse cx="190" cy="145" rx="6" ry="8" fill="#ff7aa2"/>
+        <path d="M190 145 L185 155 M190 145 L195 155 M190 145 L183 150 M190 145 L197 150" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+        <path d="M165 158 Q190 168 215 158" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>`,
+
+      // Character 3: Dog
+      `<svg class="art" id="artSvg" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fur" x1="0" x2="1">
+            <stop offset="0" stop-color="#d4a574"/>
+            <stop offset="1" stop-color="#b8956a"/>
+          </linearGradient>
+          <linearGradient id="heart" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff4d7d"/>
+            <stop offset="1" stop-color="#ff1f68"/>
+          </linearGradient>
+        </defs>
+        <path id="floatingHeart" d="M250 50 C250 33 270 25 282 38 C294 25 314 33 314 50 C314 78 282 92 282 106 C282 92 250 78 250 50Z" fill="url(#heart)" style="transform-origin: 282px 70px;">
+          <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <ellipse cx="100" cy="120" rx="30" ry="50" fill="url(#fur)"/>
+        <ellipse cx="280" cy="120" rx="30" ry="50" fill="url(#fur)"/>
+        <ellipse cx="190" cy="130" rx="75" ry="70" fill="url(#fur)"/>
+        <circle cx="165" cy="125" r="8"/>
+        <circle cx="215" cy="125" r="8"/>
+        <ellipse cx="190" cy="145" rx="10" ry="12" fill="#333"/>
+        <path d="M190 157 Q175 165 170 175 M190 157 Q205 165 210 175" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M160 160 Q190 172 220 160" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>`,
+
+      // Character 4: Bunny
+      `<svg class="art" id="artSvg" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fur" x1="0" x2="1">
+            <stop offset="0" stop-color="#e8d4f0"/>
+            <stop offset="1" stop-color="#d4b8e0"/>
+          </linearGradient>
+          <linearGradient id="heart" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff4d7d"/>
+            <stop offset="1" stop-color="#ff1f68"/>
+          </linearGradient>
+        </defs>
+        <path id="floatingHeart" d="M250 50 C250 33 270 25 282 38 C294 25 314 33 314 50 C314 78 282 92 282 106 C282 92 250 78 250 50Z" fill="url(#heart)" style="transform-origin: 282px 70px;">
+          <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <ellipse cx="130" cy="70" rx="20" ry="55" fill="url(#fur)"/>
+        <ellipse cx="250" cy="70" rx="20" ry="55" fill="url(#fur)"/>
+        <ellipse cx="190" cy="140" rx="70" ry="65" fill="url(#fur)"/>
+        <circle cx="170" cy="135" r="7"/>
+        <circle cx="210" cy="135" r="7"/>
+        <path d="M190 155 L185 160 L190 162 L195 160 Z" fill="#ff7aa2"/>
+        <path d="M190 162 Q175 168 170 175 M190 162 Q205 168 210 175" stroke="#888" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M165 165 Q190 175 215 165" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>`
+    ];
+
+    // Randomly select and display a character
+    const randomCharacter = characters[Math.floor(Math.random() * characters.length)];
+    document.getElementById('characterContainer').innerHTML = randomCharacter;
+
     /* ---------- RANDOM ROMANTIC COLOR THEMES ---------- */
     const colorThemes = [
       {
