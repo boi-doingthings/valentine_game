@@ -300,8 +300,9 @@
       <p>I knew you'd say yes! Get ready for the most amazing Valentine's Day ever! 💖</p>
       <img
         class="fireworks"
-        src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
-        alt="Fireworks"
+        id="celebrationGif"
+        src=""
+        alt="Celebration"
       />
       <p style="font-size: 18px; margin-top: 24px; color: #ff3b7a; font-weight: 700; letter-spacing: 0.5px;">
         Can't wait to celebrate with you! 🥰
@@ -693,11 +694,22 @@
       setTimeout(() => artSvg.classList.remove('shake'), 500);
     });
 
+    /* ---------- CELEBRATION GIFS ---------- */
+    const celebrationGifs = [
+      'https://media1.tenor.com/m/OrxXcqX25KcAAAAC/dudu-bubu-love-gif.gif',  // Dudu Bubu with hearts
+      'https://media1.tenor.com/m/ySITUM2KYHYAAAAC/dudu-bubu.gif'            // Dudu Bubu kissing
+    ];
+
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
       const heading = document.querySelector("h1");
       const resultHeading = document.querySelector(".result h2");
       const resultFooter = document.querySelector(".result p:last-child");
+      const celebrationGif = document.getElementById("celebrationGif");
+
+      // Randomly select a celebration GIF
+      const randomGif = celebrationGifs[Math.floor(Math.random() * celebrationGifs.length)];
+      celebrationGif.src = randomGif;
 
       zone.style.display = "none";
       hint.style.display = "none";
