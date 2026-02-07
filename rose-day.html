@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Rose Day - A Love in Bloom</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --rose-white: #fff5f8;
+      --rose-blush: #ffd4e5;
+      --rose-pink: #ffb3d4;
+      --rose-deep: #ff8fb8;
+      --cream: #fffaf5;
+      --gold: #d4af37;
+      --ink: #4a3333;
+      --shadow: rgba(255, 179, 212, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(255, 212, 229, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 179, 212, 0.2) 0%, transparent 50%),
+        linear-gradient(to bottom, #fffdf9, #fff8f3);
+      font-family: 'Crimson Text', serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating petals */
+    .petals-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .petal {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(ellipse at 30% 30%, var(--rose-blush), var(--rose-pink));
+      border-radius: 50% 50% 0 50%;
+      opacity: 0;
+      animation: fall 15s linear infinite;
+      filter: blur(0.5px);
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .day-badge {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: slideDown 0.8s ease-out 0.3s forwards;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(52px, 8vw, 92px);
+      font-weight: 400;
+      color: var(--rose-deep);
+      margin: 0 0 16px;
+      line-height: 1.1;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: titleFade 1s ease-out 0.5s forwards;
+    }
+
+    @keyframes titleFade {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .date {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 19px;
+      color: #7a6060;
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: slideDown 0.8s ease-out 0.7s forwards;
+    }
+
+    /* Main content grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .rose-art {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      filter: drop-shadow(0 20px 40px rgba(255, 179, 212, 0.3));
+      animation: gentle-float 6s ease-in-out infinite;
+      opacity: 0;
+      animation: artFade 1.2s ease-out 0.9s forwards, gentle-float 6s ease-in-out 2s infinite;
+    }
+
+    @keyframes artFade {
+      from {
+        opacity: 0;
+        transform: scale(0.9) rotate(-5deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes gentle-float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .message-column {
+      opacity: 0;
+      animation: slideIn 1s ease-out 1.1s forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .opening-message {
+      font-size: clamp(21px, 2.5vw, 28px);
+      line-height: 1.8;
+      color: var(--ink);
+      font-style: italic;
+      margin-bottom: 35px;
+      position: relative;
+      padding-left: 25px;
+      border-left: 2px solid var(--rose-pink);
+    }
+
+    /* Poetry section */
+    .poetry-section {
+      background: linear-gradient(135deg, rgba(255, 245, 248, 0.6), rgba(255, 235, 244, 0.4));
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 179, 212, 0.3);
+      border-radius: 30px;
+      padding: 50px;
+      margin: 60px 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(255, 179, 212, 0.2);
+    }
+
+    .poetry-section::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 120px;
+      color: var(--rose-blush);
+      opacity: 0.4;
+      line-height: 1;
+    }
+
+    .poetry-section p {
+      font-size: clamp(19px, 2vw, 24px);
+      line-height: 2;
+      color: var(--ink);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      font-style: italic;
+    }
+
+    /* Memory cards */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .memory-card {
+      background: white;
+      border-radius: 25px;
+      padding: 40px 35px;
+      box-shadow: 0 15px 50px rgba(255, 179, 212, 0.15);
+      border: 1px solid rgba(255, 179, 212, 0.2);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .memory-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--rose-pink), var(--rose-deep));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s ease;
+    }
+
+    .memory-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 70px rgba(255, 179, 212, 0.25);
+    }
+
+    .memory-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .memory-icon {
+      font-size: 42px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .memory-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--rose-deep);
+      margin-bottom: 15px;
+    }
+
+    .memory-text {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #5a4747;
+    }
+
+    /* Love note */
+    .love-note {
+      text-align: center;
+      margin: 80px auto 0;
+      max-width: 700px;
+      position: relative;
+    }
+
+    .love-note::before {
+      content: '🌹';
+      display: block;
+      font-size: 52px;
+      margin-bottom: 25px;
+      animation: rose-spin 20s linear infinite;
+    }
+
+    @keyframes rose-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .love-note p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+
+    .signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(36px, 4vw, 48px);
+      color: var(--rose-deep);
+      margin-top: 40px;
+    }
+
+    /* Decorative elements */
+    .decorative-circle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .circle-1 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 212, 229, 0.3), transparent 70%);
+      top: 10%;
+      right: 5%;
+      animation: float-1 8s ease-in-out infinite;
+    }
+
+    .circle-2 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255, 179, 212, 0.2), transparent 70%);
+      bottom: 15%;
+      left: 10%;
+      animation: float-2 10s ease-in-out infinite;
+    }
+
+    @keyframes float-1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+    }
+
+    @keyframes float-2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-15px, 15px); }
+    }
+
+    @media (max-width: 900px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .memory-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 60px 25px;
+      }
+
+      .poetry-section {
+        padding: 35px 25px;
+      }
+
+      .memory-card {
+        padding: 30px 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Floating petals background -->
+  <div class="petals-bg" id="petalsContainer"></div>
+
+  <!-- Decorative elements -->
+  <div class="decorative-circle circle-1"></div>
+  <div class="decorative-circle circle-2"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="day-badge">Day One • Rose Day</div>
+      <h1>Every Rose Tells a Story</h1>
+      <p class="date">February 7, 2026</p>
+    </header>
+
+    <!-- Main content grid -->
+    <div class="content-grid">
+      <div class="rose-art-container">
+        <svg class="rose-art" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Enhanced radial gradients -->
+            <radialGradient id="petal-outer" cx="30%" cy="25%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="45%" stop-color="#ffe9f3"/>
+              <stop offset="100%" stop-color="#ffb3d4"/>
+            </radialGradient>
+            <radialGradient id="petal-mid" cx="35%" cy="30%">
+              <stop offset="0%" stop-color="#fff7fb"/>
+              <stop offset="60%" stop-color="#ffd7e8"/>
+              <stop offset="100%" stop-color="#ff9fc8"/>
+            </radialGradient>
+            <radialGradient id="petal-inner" cx="40%" cy="35%">
+              <stop offset="0%" stop-color="#fff2f8"/>
+              <stop offset="70%" stop-color="#ffc4de"/>
+              <stop offset="100%" stop-color="#ff8fb8"/>
+            </radialGradient>
+            <linearGradient id="stem" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#a9cfb3"/>
+              <stop offset="60%" stop-color="#79aa8b"/>
+              <stop offset="100%" stop-color="#4f7f64"/>
+            </linearGradient>
+            <linearGradient id="leaf" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#b7d8c1"/>
+              <stop offset="100%" stop-color="#6e9f7f"/>
+            </linearGradient>
+            <radialGradient id="center" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#fff6d6"/>
+              <stop offset="55%" stop-color="#ffe1b5"/>
+              <stop offset="100%" stop-color="#f6c58d"/>
+            </radialGradient>
+            <!-- Enhanced shadow filters -->
+            <filter id="softShadow" x="-20%" y="-20%" width="140%" height="160%">
+              <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#f4a5c4" flood-opacity="0.35"/>
+            </filter>
+            <filter id="petalShadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#d989a8" flood-opacity="0.35"/>
+            </filter>
+            <!-- Reusable petal templates -->
+            <path id="outer-petal" d="M250 165 C220 155 195 125 195 95 C195 68 220 50 250 50 C280 50 305 68 305 95 C305 125 280 155 250 165 Z"/>
+            <path id="mid-petal" d="M250 175 C228 168 212 148 212 125 C212 105 228 92 250 92 C272 92 288 105 288 125 C288 148 272 168 250 175 Z"/>
+            <path id="inner-petal" d="M250 182 C235 178 225 166 225 152 C225 140 236 132 250 132 C264 132 275 140 275 152 C275 166 265 178 250 182 Z"/>
+          </defs>
+
+          <!-- Atmospheric glow behind rose -->
+          <circle cx="250" cy="190" r="175" fill="#ffd4e5" opacity="0.22" filter="url(#softShadow)"/>
+          <circle cx="250" cy="190" r="130" fill="#ffe2ef" opacity="0.35"/>
+
+          <!-- Stem with depth (moved up to connect better) -->
+          <path d="M250 560 Q248 500 247 440 Q246 380 246 320 Q246 280 247 250"
+                stroke="url(#stem)"
+                stroke-width="12"
+                fill="none"
+                stroke-linecap="round"/>
+          <path d="M250 560 Q248 500 247 440 Q246 380 246 320 Q246 280 247 250"
+                stroke="#3f6f56"
+                stroke-width="2"
+                opacity="0.35"
+                fill="none"
+                stroke-linecap="round"/>
+
+          <!-- Enhanced leaves with veins -->
+          <path d="M246 470 Q205 462 180 475 Q198 497 238 485 Z"
+                fill="url(#leaf)"
+                stroke="#5b8b6d"
+                stroke-width="1.5"/>
+          <path d="M200 478 Q222 474 236 479" stroke="#46745a" stroke-width="1.2" fill="none" opacity="0.55"/>
+
+          <path d="M246 410 Q288 400 318 418 Q298 442 255 425 Z"
+                fill="url(#leaf)"
+                stroke="#5b8b6d"
+                stroke-width="1.5"/>
+          <path d="M288 418 Q274 414 258 418" stroke="#46745a" stroke-width="1.2" fill="none" opacity="0.55"/>
+
+          <path d="M246 515 Q210 526 192 546 Q212 558 242 538 Z"
+                fill="url(#leaf)"
+                stroke="#5b8b6d"
+                stroke-width="1.5"/>
+          <path d="M210 536 Q226 532 240 536" stroke="#46745a" stroke-width="1.2" fill="none" opacity="0.55"/>
+
+          <!-- Rose bloom with smart rotation -->
+          <g filter="url(#softShadow)">
+            <!-- Outer petals (8 petals rotated around center) -->
+            <g fill="url(#petal-outer)" stroke="#ffd1e3" stroke-width="0.6" filter="url(#petalShadow)">
+              <use href="#outer-petal" transform="rotate(-10 250 185) translate(0 20)" opacity="0.92"/>
+              <use href="#outer-petal" transform="rotate(25 250 185) translate(0 18)" opacity="0.9"/>
+              <use href="#outer-petal" transform="rotate(60 250 185) translate(0 16)" opacity="0.88"/>
+              <use href="#outer-petal" transform="rotate(95 250 185) translate(0 15)" opacity="0.9"/>
+              <use href="#outer-petal" transform="rotate(130 250 185) translate(0 16)" opacity="0.88"/>
+              <use href="#outer-petal" transform="rotate(165 250 185) translate(0 18)" opacity="0.9"/>
+              <use href="#outer-petal" transform="rotate(200 250 185) translate(0 20)" opacity="0.92"/>
+              <use href="#outer-petal" transform="rotate(235 250 185) translate(0 18)" opacity="0.9"/>
+            </g>
+
+            <!-- Middle petals (8 petals rotated with offset) -->
+            <g fill="url(#petal-mid)" stroke="#ffb2d1" stroke-width="0.5" filter="url(#petalShadow)">
+              <use href="#mid-petal" transform="rotate(5 250 185) translate(0 10)" opacity="0.95"/>
+              <use href="#mid-petal" transform="rotate(45 250 185) translate(0 8)" opacity="0.93"/>
+              <use href="#mid-petal" transform="rotate(85 250 185) translate(0 9)" opacity="0.92"/>
+              <use href="#mid-petal" transform="rotate(125 250 185) translate(0 8)" opacity="0.93"/>
+              <use href="#mid-petal" transform="rotate(165 250 185) translate(0 10)" opacity="0.95"/>
+              <use href="#mid-petal" transform="rotate(205 250 185) translate(0 9)" opacity="0.93"/>
+              <use href="#mid-petal" transform="rotate(245 250 185) translate(0 8)" opacity="0.92"/>
+              <use href="#mid-petal" transform="rotate(285 250 185) translate(0 9)" opacity="0.93"/>
+            </g>
+
+            <!-- Inner petals (8 tight petals forming spiral) -->
+            <g fill="url(#petal-inner)" stroke="#ff97bf" stroke-width="0.4">
+              <use href="#inner-petal" transform="rotate(15 250 185) translate(0 4)"/>
+              <use href="#inner-petal" transform="rotate(60 250 185) translate(0 5)"/>
+              <use href="#inner-petal" transform="rotate(105 250 185) translate(0 4)"/>
+              <use href="#inner-petal" transform="rotate(150 250 185) translate(0 5)"/>
+              <use href="#inner-petal" transform="rotate(195 250 185) translate(0 4)"/>
+              <use href="#inner-petal" transform="rotate(240 250 185) translate(0 5)"/>
+              <use href="#inner-petal" transform="rotate(285 250 185) translate(0 4)"/>
+              <use href="#inner-petal" transform="rotate(330 250 185) translate(0 5)"/>
+            </g>
+
+            <!-- Spiral core for depth -->
+            <path d="M250 188 C262 176 276 174 282 182 C289 192 283 208 268 214 C252 221 234 217 227 205 C220 192 230 178 246 176"
+                  fill="none"
+                  stroke="#ff8fb8"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  opacity="0.75"/>
+
+            <!-- Center (smaller and refined) -->
+            <circle cx="250" cy="190" r="24" fill="url(#center)"/>
+            <circle cx="250" cy="190" r="16" fill="#fff2cf" opacity="0.55"/>
+
+            <!-- Stamen dots -->
+            <g fill="#d4af37" opacity="0.6">
+              <circle cx="244" cy="186" r="2.2"/>
+              <circle cx="256" cy="186" r="2.2"/>
+              <circle cx="250" cy="182" r="2.2"/>
+              <circle cx="247" cy="196" r="2.2"/>
+              <circle cx="253" cy="196" r="2.2"/>
+              <circle cx="250" cy="200" r="2.2"/>
+            </g>
+          </g>
+
+          <!-- Shimmer sparkles on rose -->
+          <g opacity="0.8">
+            <circle cx="180" cy="120" r="3" fill="#fff" opacity="0">
+              <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="320" cy="140" r="3" fill="#fff" opacity="0">
+              <animate attributeName="opacity" values="0;1;0" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+              <animate attributeName="r" values="2;4;2" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="230" cy="95" r="2.5" fill="#fff" opacity="0">
+              <animate attributeName="opacity" values="0;0.9;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+              <animate attributeName="r" values="1.5;3.5;1.5" dur="3s" begin="1s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="280" cy="240" r="3" fill="#fff" opacity="0">
+              <animate attributeName="opacity" values="0;1;0" dur="2.8s" begin="0.8s" repeatCount="indefinite"/>
+              <animate attributeName="r" values="2;4;2" dur="2.8s" begin="0.8s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Gold shimmer -->
+            <circle cx="200" cy="170" r="2" fill="#ffd700" opacity="0">
+              <animate attributeName="opacity" values="0;0.8;0" dur="3.5s" begin="1.5s" repeatCount="indefinite"/>
+              <animate attributeName="r" values="1;3;1" dur="3.5s" begin="1.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="300" cy="190" r="2" fill="#ffd700" opacity="0">
+              <animate attributeName="opacity" values="0;0.8;0" dur="3.2s" begin="0.3s" repeatCount="indefinite"/>
+              <animate attributeName="r" values="1;3;1" dur="3.2s" begin="0.3s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <!-- Floating hearts -->
+          <g class="floating-hearts">
+            <!-- Heart 1 -->
+            <path d="M185 200 C185 195 180 190 175 190 C172 190 170 192 170 195 C170 192 168 190 165 190 C160 190 155 195 155 200 C155 208 170 218 170 218 C170 218 185 208 185 200 Z"
+                  fill="#ffb3d4" opacity="0">
+              <animate attributeName="opacity" values="0;0.7;0" dur="4s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0 0; -10 -50" dur="4s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" values="0 170 200; 15 170 200" dur="4s" repeatCount="indefinite" additive="sum"/>
+            </path>
+
+            <!-- Heart 2 -->
+            <path d="M345 160 C345 155 340 150 335 150 C332 150 330 152 330 155 C330 152 328 150 325 150 C320 150 315 155 315 160 C315 168 330 178 330 178 C330 178 345 168 345 160 Z"
+                  fill="#ffd4e5" opacity="0">
+              <animate attributeName="opacity" values="0;0.7;0" dur="5s" begin="1s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0 0; 15 -60" dur="5s" begin="1s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" values="0 330 160; -20 330 160" dur="5s" begin="1s" repeatCount="indefinite" additive="sum"/>
+            </path>
+
+            <!-- Heart 3 -->
+            <path d="M130 150 C130 146 126 142 122 142 C120 142 118 143 118 146 C118 143 116 142 114 142 C110 142 106 146 106 150 C106 156 118 164 118 164 C118 164 130 156 130 150 Z"
+                  fill="#ff8fb8" opacity="0">
+              <animate attributeName="opacity" values="0;0.6;0" dur="4.5s" begin="2s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0 0; -20 -55" dur="4.5s" begin="2s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" values="0 118 150; 25 118 150" dur="4.5s" begin="2s" repeatCount="indefinite" additive="sum"/>
+            </path>
+
+            <!-- Heart 4 -->
+            <path d="M370 210 C370 205 365 200 360 200 C357 200 355 202 355 205 C355 202 353 200 350 200 C345 200 340 205 340 210 C340 218 355 228 355 228 C355 228 370 218 370 210 Z"
+                  fill="#ffcce0" opacity="0">
+              <animate attributeName="opacity" values="0;0.65;0" dur="5.5s" begin="0.5s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0 0; 20 -65" dur="5.5s" begin="0.5s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" values="0 355 210; -15 355 210" dur="5.5s" begin="0.5s" repeatCount="indefinite" additive="sum"/>
+            </path>
+
+            <!-- Heart 5 (smaller) -->
+            <path d="M250 80 C250 77 247 74 244 74 C242 74 241 75 241 77 C241 75 240 74 238 74 C235 74 232 77 232 80 C232 85 241 92 241 92 C241 92 250 85 250 80 Z"
+                  fill="#fff5f8" opacity="0">
+              <animate attributeName="opacity" values="0;0.8;0" dur="4s" begin="1.5s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0 0; 5 -45" dur="4s" begin="1.5s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" values="0 241 80; 10 241 80" dur="4s" begin="1.5s" repeatCount="indefinite" additive="sum"/>
+            </path>
+
+            <!-- Heart 6 (smaller) -->
+            <path d="M290 255 C290 252 287 249 284 249 C282 249 281 250 281 252 C281 250 280 249 278 249 C275 249 272 252 272 255 C272 260 281 267 281 267 C281 267 290 260 290 255 Z"
+                  fill="#ffe9f3" opacity="0">
+              <animate attributeName="opacity" values="0;0.7;0" dur="4.8s" begin="2.5s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0 0; 10 -50" dur="4.8s" begin="2.5s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" values="0 281 255; -12 281 255" dur="4.8s" begin="2.5s" repeatCount="indefinite" additive="sum"/>
+            </path>
+          </g>
+
+          <!-- Dewdrops -->
+          <ellipse cx="215" cy="140" rx="4.5" ry="5.5" fill="#ffffff" opacity="0.85">
+            <animate attributeName="opacity" values="0.75;0.95;0.75" dur="3s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="216" cy="139" rx="1.8" ry="2.2" fill="#ffffff" opacity="0.95"/>
+
+          <ellipse cx="288" cy="165" rx="4" ry="5" fill="#ffffff" opacity="0.8">
+            <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3.5s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="289" cy="164" rx="1.6" ry="2" fill="#ffffff" opacity="0.95"/>
+
+          <ellipse cx="265" cy="215" rx="3.5" ry="4.5" fill="#ffffff" opacity="0.82">
+            <animate attributeName="opacity" values="0.72;0.88;0.72" dur="4s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="266" cy="214" rx="1.4" ry="1.8" fill="#ffffff" opacity="0.95"/>
+
+          <!-- Sparkles -->
+          <circle cx="185" cy="115" r="2.5" fill="#ffd700" opacity="0">
+            <animate attributeName="opacity" values="0;0.8;0" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="1.5;2.5;1.5" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="315" cy="145" r="2.5" fill="#ffd700" opacity="0">
+            <animate attributeName="opacity" values="0;0.75;0" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="1.5;2.5;1.5" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="200" cy="240" r="2" fill="#ffd700" opacity="0">
+            <animate attributeName="opacity" values="0;0.7;0" dur="3.5s" begin="1s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="1;2;1" dur="3.5s" begin="1s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+
+      <div class="message-column">
+        <p class="opening-message">
+          Like a white rose blushing at dawn's first light, our love blooms with quiet elegance and tender grace. You are the garden where my heart finds peace.
+        </p>
+      </div>
+    </div>
+
+    <!-- Poetry section -->
+    <section class="poetry-section">
+      <p>
+        In every petal's gentle curve, I see the way you move through life—<br>
+        softly, beautifully, with a grace that makes the ordinary extraordinary.<br>
+        You are the rose I never knew I was searching for.
+      </p>
+    </section>
+
+    <!-- Memory cards -->
+    <div class="memory-grid">
+      <div class="memory-card">
+        <span class="memory-icon">🌸</span>
+        <h3 class="memory-title">Morning Light</h3>
+        <p class="memory-text">
+          The way you smile when you first wake up—sleepy and soft—reminds me that every day with you is a gift worth cherishing.
+        </p>
+      </div>
+
+      <div class="memory-card">
+        <span class="memory-icon">✨</span>
+        <h3 class="memory-title">Quiet Moments</h3>
+        <p class="memory-text">
+          When silence speaks louder than words, and just being near you feels like the most natural thing in the world. In these moments, I find my peace.
+        </p>
+      </div>
+
+      <div class="memory-card">
+        <span class="memory-icon">💫</span>
+        <h3 class="memory-title">Safe Haven</h3>
+        <p class="memory-text">
+          With you, I've learned that home isn't a place. It's the warmth I feel in your presence. It's the belonging that needs no explanation, the comfort that asks for nothing but simply exists between us.
+        </p>
+      </div>
+    </div>
+
+    <!-- Love note -->
+    <div class="love-note">
+      <p>
+        Just as a rose unfolds petal by petal, revealing its beauty slowly and completely, I fall in love with you more deeply each day. Thank you for being my constant bloom in every season.
+      </p>
+      <div class="signature">Forever yours ♡</div>
+    </div>
+  </div>
+
+  <script>
+    // Create floating petals
+    const petalsContainer = document.getElementById('petalsContainer');
+
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = (Math.random() * 8 + 12) + 's';
+      petal.style.animationDelay = Math.random() * 5 + 's';
+      petalsContainer.appendChild(petal);
+
+      setTimeout(() => petal.remove(), 20000);
+    }
+
+    // Create initial petals
+    for (let i = 0; i < 20; i++) {
+      setTimeout(createPetal, i * 300);
+    }
+
+    // Continue creating petals
+    setInterval(createPetal, 1500);
+  </script>
+</body>
+</html>
