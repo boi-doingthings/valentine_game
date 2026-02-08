@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kiss Day - Love's Sweetest Language</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Raleway:ital,wght@0,400;0,600;1,400&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --magenta: #ff1f8f;
+      --magenta-light: #ff5eb3;
+      --magenta-dark: #d91976;
+      --pink: #ffb3d9;
+      --rose: #ff6b9d;
+      --cream: #fff5f9;
+      --ink: #4a1e3a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 18% 28%, rgba(255, 30, 143, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 82% 72%, rgba(255, 179, 217, 0.18) 0%, transparent 50%),
+        linear-gradient(to bottom, #ffe9f5, #ffd9eb);
+      font-family: 'Raleway', sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating kisses */
+    .kisses-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .kiss-particle {
+      position: absolute;
+      font-size: 34px;
+      animation: kiss-float 16s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes kiss-float {
+      0% {
+        transform: translate(0, 110vh) rotate(0deg) scale(0.7);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.7;
+      }
+      85% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translate(120px, -10vh) rotate(360deg) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 70px 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 70px;
+      animation: fadeIn 1.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .day-badge {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--magenta);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: slideDown 0.9s ease-out 0.3s forwards;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Sacramento', cursive;
+      font-size: clamp(60px, 10vw, 120px);
+      font-weight: 400;
+      background: linear-gradient(135deg, var(--magenta), var(--magenta-dark), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: shimmer 6s linear infinite;
+      margin: 0 0 18px;
+      line-height: 1;
+      opacity: 0;
+      animation: titleReveal 1.2s ease-out 0.5s forwards, shimmer 6s linear 1.7s infinite;
+    }
+
+    @keyframes titleReveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shimmer {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    .date {
+      font-size: 15px;
+      color: #8a4a7a;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Kiss showcase */
+    .kiss-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+      margin: 70px 0;
+    }
+
+    .kiss-art {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      filter: drop-shadow(0 30px 65px rgba(255, 30, 143, 0.35));
+      animation: kiss-glow 4s ease-in-out infinite;
+      opacity: 0;
+      animation: artAppear 1.3s ease-out 0.7s forwards, kiss-glow 4s ease-in-out 2s infinite;
+    }
+
+    @keyframes artAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.85) rotate(-8deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes kiss-glow {
+      0%, 100% {
+        filter: drop-shadow(0 30px 65px rgba(255, 30, 143, 0.35));
+      }
+      50% {
+        filter: drop-shadow(0 35px 75px rgba(255, 30, 143, 0.5));
+      }
+    }
+
+    .kiss-message {
+      opacity: 0;
+      animation: slideInLeft 1.1s ease-out 0.9s forwards;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(35px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .kiss-message h2 {
+      font-family: 'Sacramento', cursive;
+      font-size: clamp(38px, 5vw, 56px);
+      font-weight: 400;
+      background: linear-gradient(135deg, var(--magenta), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 25px;
+    }
+
+    .kiss-message p {
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.9;
+      color: var(--ink);
+    }
+
+    /* Romance section */
+    .romance-section {
+      background: linear-gradient(135deg, rgba(255, 30, 143, 0.12) 0%, rgba(255, 179, 217, 0.15) 100%);
+      border-radius: 40px;
+      padding: 65px 55px;
+      margin: 90px 0;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 30, 143, 0.2);
+      box-shadow: 0 28px 75px rgba(255, 30, 143, 0.15);
+    }
+
+    .romance-section::before {
+      content: '💋';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      font-size: 380px;
+      opacity: 0.04;
+      transform: rotate(-25deg);
+    }
+
+    .romance-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .romance-content h3 {
+      font-family: 'Parisienne', cursive;
+      font-size: clamp(40px, 5.5vw, 62px);
+      font-weight: 400;
+      color: var(--magenta-dark);
+      margin-bottom: 30px;
+    }
+
+    .romance-text {
+      font-size: clamp(19px, 2.3vw, 26px);
+      line-height: 2;
+      color: var(--ink);
+      max-width: 850px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* Kiss meanings */
+    .kiss-meanings {
+      margin: 90px 0;
+    }
+
+    .meanings-header {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .meanings-header h3 {
+      font-family: 'Sacramento', cursive;
+      font-size: clamp(42px, 6vw, 68px);
+      font-weight: 400;
+      background: linear-gradient(135deg, var(--magenta), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .meanings-header p {
+      font-size: 19px;
+      color: #8a4a7a;
+      font-style: italic;
+    }
+
+    .meanings-list {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .meaning-item {
+      display: flex;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 45px;
+      padding: 45px 40px;
+      background: white;
+      border-radius: 30px;
+      box-shadow: 0 22px 60px rgba(255, 30, 143, 0.12);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 179, 217, 0.25);
+    }
+
+    .meaning-item:hover {
+      transform: translateX(15px);
+      box-shadow: 0 28px 75px rgba(255, 30, 143, 0.18);
+    }
+
+    .meaning-emoji {
+      font-size: 68px;
+      flex-shrink: 0;
+    }
+
+    .meaning-content h4 {
+      font-family: 'Sacramento', cursive;
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--magenta-dark);
+      margin-bottom: 14px;
+    }
+
+    .meaning-content p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #5a4a55;
+    }
+
+    /* Love letter */
+    .love-letter {
+      max-width: 850px;
+      margin: 100px auto;
+      padding: 60px 50px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 249, 0.95));
+      border-radius: 35px;
+      box-shadow: 0 25px 70px rgba(255, 30, 143, 0.15);
+      border: 1px solid rgba(255, 179, 217, 0.3);
+    }
+
+    .love-letter::before {
+      content: '💌';
+      display: block;
+      text-align: center;
+      font-size: 68px;
+      margin-bottom: 30px;
+      animation: letter-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes letter-pulse {
+      0%, 100% {
+        transform: scale(1) rotate(-3deg);
+      }
+      50% {
+        transform: scale(1.12) rotate(3deg);
+      }
+    }
+
+    .love-letter p {
+      font-size: clamp(19px, 2.2vw, 25px);
+      line-height: 2;
+      color: var(--ink);
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 35px;
+    }
+
+    .signature {
+      font-family: 'Parisienne', cursive;
+      font-size: clamp(44px, 5.5vw, 64px);
+      font-weight: 400;
+      text-align: center;
+      background: linear-gradient(135deg, var(--magenta), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Decorative sparkles */
+    .deco-sparkle {
+      position: absolute;
+      font-size: 160px;
+      opacity: 0.09;
+      pointer-events: none;
+    }
+
+    .sparkle-1 {
+      top: 12%;
+      right: 8%;
+      animation: spin-sparkle 20s linear infinite;
+    }
+
+    .sparkle-2 {
+      bottom: 15%;
+      left: 10%;
+      animation: spin-sparkle 25s linear infinite reverse;
+    }
+
+    @keyframes spin-sparkle {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 950px) {
+      .kiss-showcase {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .meaning-item {
+        flex-direction: column;
+        gap: 25px;
+        padding: 38px 30px;
+      }
+
+      .meaning-emoji {
+        font-size: 58px;
+        text-align: center;
+      }
+
+      .container {
+        padding: 60px 25px;
+      }
+
+      .romance-section,
+      .love-letter {
+        padding: 50px 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Floating kisses background -->
+  <div class="kisses-bg" id="kissesContainer"></div>
+
+  <!-- Decorative sparkles -->
+  <div class="deco-sparkle sparkle-1">✨</div>
+  <div class="deco-sparkle sparkle-2">💫</div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="day-badge">Day Seven • Kiss Day</div>
+      <h1>Every Kiss is a Love Letter</h1>
+      <p class="date">February 13, 2026</p>
+    </header>
+
+    <!-- Kiss showcase -->
+    <section class="kiss-showcase">
+      <div>
+        <svg class="kiss-art" viewBox="0 0 450 450" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lips-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ff5eb3;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#ff1f8f;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#d91976;stop-opacity:1" />
+            </linearGradient>
+            <radialGradient id="kiss-radiance" cx="50%" cy="50%">
+              <stop offset="0%" style="stop-color:#ff1f8f;stop-opacity:0.5" />
+              <stop offset="100%" style="stop-color:#ff1f8f;stop-opacity:0" />
+            </radialGradient>
+          </defs>
+
+          <!-- Radiant glow -->
+          <circle cx="225" cy="225" r="160" fill="url(#kiss-radiance)">
+            <animate attributeName="r" values="160;180;160" dur="4.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.4;0.6;0.4" dur="4.5s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Upper lip -->
+          <path d="M140 220 Q175 185 225 195 Q275 185 310 220 Q285 245 225 238 Q165 245 140 220 Z" fill="url(#lips-gradient)" stroke="#d91976" stroke-width="3.5"/>
+
+          <!-- Lower lip -->
+          <path d="M140 220 Q175 265 225 258 Q275 265 310 220 Q285 235 225 238 Q165 235 140 220 Z" fill="url(#lips-gradient)" stroke="#d91976" stroke-width="3.5" opacity="0.95"/>
+
+          <!-- Cupid's bow detail -->
+          <path d="M205 195 L225 188 L245 195" stroke="#d91976" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+          <!-- Lip shine/highlights -->
+          <ellipse cx="200" cy="215" rx="18" ry="10" fill="#ffffff" opacity="0.5"/>
+          <ellipse cx="250" cy="215" rx="18" ry="10" fill="#ffffff" opacity="0.5"/>
+          <ellipse cx="180" cy="235" rx="12" ry="7" fill="#ffffff" opacity="0.3"/>
+          <ellipse cx="270" cy="235" rx="12" ry="7" fill="#ffffff" opacity="0.3"/>
+
+          <!-- Lip line detail -->
+          <path d="M160 228 Q225 236 290 228" stroke="#d91976" stroke-width="2" fill="none" opacity="0.5"/>
+
+          <!-- Hearts floating around -->
+          <path d="M100 160 C100 148 88 141 78 148 C68 141 56 148 56 160 C56 178 78 190 100 205 C122 190 144 178 144 160 C144 148 132 141 122 148 C112 141 100 148 100 160 Z" fill="#ff6b9d" opacity="0.7">
+            <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="transform" type="translate" values="0,0; 0,-5; 0,0" dur="2.5s" repeatCount="indefinite"/>
+          </path>
+
+          <path d="M350 165 C350 153 338 146 328 153 C318 146 306 153 306 165 C306 183 328 195 350 210 C372 195 394 183 394 165 C394 153 382 146 372 153 C362 146 350 153 350 165 Z" fill="#ff1f8f" opacity="0.7">
+            <animate attributeName="opacity" values="0.9;0.5;0.9" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="transform" type="translate" values="0,0; 0,-5; 0,0" dur="2.5s" repeatCount="indefinite" begin="0.5s"/>
+          </path>
+
+          <!-- Small kiss marks (lipstick prints) -->
+          <g opacity="0.5">
+            <path d="M110 320 Q115 315 120 320 Q118 325 115 323 Q112 325 110 320 Z" fill="#ff1f8f"/>
+            <path d="M340 310 Q345 305 350 310 Q348 315 345 313 Q342 315 340 310 Z" fill="#ff5eb3"/>
+            <path d="M130 360 Q135 355 140 360 Q138 365 135 363 Q132 365 130 360 Z" fill="#ff6b9d"/>
+          </g>
+
+          <!-- Sparkle particles -->
+          <circle cx="170" cy="175" r="4" fill="#ffd700">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="280" cy="180" r="5" fill="#ffd700">
+            <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="210" cy="270" r="3.5" fill="#fff">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="240" cy="275" r="4" fill="#fff">
+            <animate attributeName="opacity" values="1;0.4;1" dur="1.7s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="225" cy="160" r="3" fill="#ffd700">
+            <animate attributeName="opacity" values="0.4;1;0.4" dur="1.9s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+
+      <div class="kiss-message">
+        <h2>Poetry in Silence</h2>
+        <p>
+          Your kisses are poetry written in silence. Each one tells me "I'm here," "I love you," "You matter." They're the punctuation marks in our love story—sweet, tender, and utterly unforgettable.
+        </p>
+      </div>
+    </section>
+
+    <!-- Personalized message -->
+    <div style="text-align: center; margin: 50px 0 60px; opacity: 0; animation: fadeIn 1.5s ease-out 2s forwards;">
+      <p style="font-family: 'Great Vibes', cursive; font-size: clamp(42px, 6vw, 64px); color: #ff8fb8; margin: 0; line-height: 1.3;">
+        Happy Kiss Day, Manno 💋❤️
+      </p>
+    </div>
+
+    <!-- Romance section -->
+    <section class="romance-section">
+      <div class="romance-content">
+        <h3>The Language of Our Love</h3>
+        <p class="romance-text">
+          I love the way you kiss me good morning, like it's the first time.<br>
+          The way you kiss me goodbye, like it's the hardest thing to do.<br>
+          The way you kiss me hello, like you've been waiting all day.<br>
+          Every kiss with you feels like coming home.
+        </p>
+      </div>
+    </section>
+
+    <!-- Kiss meanings -->
+    <section class="kiss-meanings">
+      <div class="meanings-header">
+        <h3>Every Kiss I Cherish</h3>
+        <p>Each one a different kind of magic</p>
+      </div>
+
+      <div class="meanings-list">
+        <div class="meaning-item">
+          <div class="meaning-emoji">💫</div>
+          <div class="meaning-content">
+            <h4>Forehead Kisses</h4>
+            <p>
+              The gentle press of your lips on my forehead that says "I've got you" louder than any words could. These kisses feel like protection, like tenderness, like home. They're my favorite goodnight, my sweetest comfort.
+            </p>
+          </div>
+        </div>
+
+        <div class="meaning-item">
+          <div class="meaning-emoji">⚡</div>
+          <div class="meaning-content">
+            <h4>Surprise Kisses</h4>
+            <p>
+              The unexpected kiss that catches me off guard and makes me blush. Whether you're sneaking up from behind or stealing one mid-conversation, these kisses remind me that romance lives in spontaneity.
+            </p>
+          </div>
+        </div>
+
+        <div class="meaning-item">
+          <div class="meaning-emoji">🌊</div>
+          <div class="meaning-content">
+            <h4>Deep, Slow Kisses</h4>
+            <p>
+              The kind that makes time stop and the world disappear. Where nothing exists except you, me, and this moment. These kisses speak of passion, connection, and a love that runs deeper than oceans.
+            </p>
+          </div>
+        </div>
+
+        <div class="meaning-item">
+          <div class="meaning-emoji">😊</div>
+          <div class="meaning-content">
+            <h4>Playful Kisses</h4>
+            <p>
+              The quick pecks that make us both laugh. The butterfly kisses. The silly smooches that turn into giggles. These kisses remind me that love doesn't always have to be serious—it can be light, fun, and joyful.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Love letter -->
+    <div class="love-letter">
+      <p>
+        They say a kiss is just a kiss, but with you, it's so much more. It's a promise, a celebration, a comfort, and a reminder that I'm loved beyond measure. I could kiss you a thousand times and still crave one more.
+      </p>
+      <p style="font-family: 'Sacramento', cursive; font-size: clamp(22px, 3vw, 32px); color: var(--magenta-dark);">
+        "One day, we'll be old and wrinkly, and I'll still want to kiss you every single morning."
+      </p>
+      <div class="signature">Sealed with all my kisses ♡</div>
+    </div>
+  </div>
+
+  <script>
+    // Create floating kisses
+    const kissesContainer = document.getElementById('kissesContainer');
+    const kissEmojis = ['💋', '💖', '💕', '💗', '💓', '💝', '❤️'];
+
+    function createKiss() {
+      const kiss = document.createElement('div');
+      kiss.className = 'kiss-particle';
+      kiss.textContent = kissEmojis[Math.floor(Math.random() * kissEmojis.length)];
+      kiss.style.left = Math.random() * 100 + 'vw';
+      kiss.style.animationDuration = (Math.random() * 6 + 14) + 's';
+      kiss.style.animationDelay = Math.random() * 5 + 's';
+      kissesContainer.appendChild(kiss);
+
+      setTimeout(() => kiss.remove(), 21000);
+    }
+
+    for (let i = 0; i < 14; i++) {
+      setTimeout(createKiss, i * 700);
+    }
+
+    setInterval(createKiss, 2200);
+  </script>
+</body>
+</html>

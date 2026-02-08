@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Promise Day - My Eternal Vows to You</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-light: #f4e4b7;
+      --coral: #ff9a8b;
+      --peach: #ffd3a5;
+      --lavender: #e0c3fc;
+      --cream: #fffef7;
+      --warm-shadow: rgba(212, 175, 55, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #fff9f0 0%, #ffe8e0 30%, #ffd4e8 70%, #f0e8ff 100%);
+      font-family: 'Libre Baskerville', serif;
+      overflow-x: hidden;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .floating-particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      font-size: 18px;
+      opacity: 0.5;
+      animation: float-drift 8s ease-in-out infinite;
+    }
+
+    @keyframes float-drift {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.3;
+      }
+      25% {
+        transform: translate(20px, -30px) rotate(10deg);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translate(-10px, -50px) rotate(-5deg);
+        opacity: 0.4;
+      }
+      75% {
+        transform: translate(30px, -20px) rotate(15deg);
+        opacity: 0.7;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 250, 245, 0.98));
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 70px 50px;
+      box-shadow:
+        0 30px 90px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      position: relative;
+      z-index: 10;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      animation: pageEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes pageEnter {
+      from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .decorative-corner {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      opacity: 0.15;
+    }
+
+    .corner-tl {
+      top: 0;
+      left: 0;
+      border-top: 3px solid var(--gold);
+      border-left: 3px solid var(--gold);
+      border-radius: 30px 0 0 0;
+    }
+
+    .corner-br {
+      bottom: 0;
+      right: 0;
+      border-bottom: 3px solid var(--gold);
+      border-right: 3px solid var(--gold);
+      border-radius: 0 0 30px 0;
+    }
+
+    .day-badge {
+      display: inline-block;
+      padding: 10px 28px;
+      background: linear-gradient(135deg, var(--gold), #c9a959);
+      color: white;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px var(--warm-shadow);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    h1 {
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(48px, 7vw, 78px);
+      background: linear-gradient(135deg, #d4af37 0%, #ff9a8b 50%, #e0c3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0 0 15px;
+      text-align: center;
+      line-height: 1.2;
+      font-weight: 400;
+      filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.2));
+    }
+
+    .date {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 19px;
+      color: #8b7355;
+      margin-bottom: 50px;
+      letter-spacing: 1px;
+    }
+
+    .promise-art {
+      width: min(380px, 100%);
+      margin: 45px auto;
+      display: block;
+      filter: drop-shadow(0 25px 40px rgba(212, 175, 55, 0.25));
+      animation: gentle-pulse 5s ease-in-out infinite;
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 25px 40px rgba(212, 175, 55, 0.25));
+      }
+      50% {
+        transform: scale(1.02);
+        filter: drop-shadow(0 30px 50px rgba(212, 175, 55, 0.35));
+      }
+    }
+
+    .intro-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3vw, 24px);
+      line-height: 1.9;
+      color: #5a4a3a;
+      text-align: center;
+      margin: 50px auto;
+      max-width: 700px;
+      font-style: italic;
+      position: relative;
+    }
+
+    .intro-text::before {
+      content: '"';
+      font-size: 80px;
+      color: var(--gold);
+      opacity: 0.3;
+      position: absolute;
+      top: -30px;
+      left: -15px;
+      font-family: 'Alex Brush', cursive;
+    }
+
+    .vow-section {
+      margin: 60px 0;
+    }
+
+    .section-title {
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(36px, 5vw, 48px);
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 45px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .promise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .promise-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 250, 240, 0.95));
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 20px;
+      padding: 35px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+    }
+
+    .promise-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--coral), var(--gold), var(--lavender));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .promise-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.25);
+      border-color: var(--gold);
+    }
+
+    .promise-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .promise-icon {
+      font-size: 42px;
+      margin-bottom: 18px;
+      display: block;
+      text-align: center;
+      filter: grayscale(0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .promise-card:hover .promise-icon {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .promise-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #6b5543;
+      margin-bottom: 12px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .promise-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #7a6a5a;
+      text-align: center;
+    }
+
+    .sacred-vow {
+      background: linear-gradient(to right,
+        rgba(255, 234, 220, 0.6),
+        rgba(255, 250, 240, 0.9),
+        rgba(255, 234, 220, 0.6)
+      );
+      border-left: 4px solid var(--gold);
+      border-right: 4px solid var(--gold);
+      padding: 45px 40px;
+      margin: 50px 0;
+      border-radius: 15px;
+      position: relative;
+      box-shadow: inset 0 2px 20px rgba(212, 175, 55, 0.1);
+    }
+
+    .sacred-vow::before,
+    .sacred-vow::after {
+      content: '✦';
+      position: absolute;
+      font-size: 28px;
+      color: var(--gold);
+      opacity: 0.5;
+    }
+
+    .sacred-vow::before {
+      top: 20px;
+      left: 20px;
+    }
+
+    .sacred-vow::after {
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .vow-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2.5vw, 22px);
+      line-height: 2;
+      color: #5a4a3a;
+      text-align: center;
+      font-style: italic;
+      margin: 0;
+    }
+
+    .vow-emphasis {
+      font-family: 'Alex Brush', cursive;
+      font-size: 1.4em;
+      color: var(--gold);
+      font-style: normal;
+      display: inline-block;
+      margin: 0 5px;
+    }
+
+    .infinity-promises {
+      margin: 60px 0;
+    }
+
+    .infinity-row {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin: 25px 0;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .infinity-row:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(212, 175, 55, 0.3);
+      transform: translateX(5px);
+    }
+
+    .infinity-symbol {
+      font-size: 32px;
+      color: var(--gold);
+      flex-shrink: 0;
+      animation: rotate-subtle 8s linear infinite;
+    }
+
+    @keyframes rotate-subtle {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
+    }
+
+    .infinity-promise-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #6b5543;
+    }
+
+    .infinity-promise-text strong {
+      font-weight: 700;
+      color: #5a4a3a;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .closing-seal {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 2px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .seal-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: #8b7355;
+      font-style: italic;
+      margin-bottom: 25px;
+    }
+
+    .signature {
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(38px, 5vw, 52px);
+      background: linear-gradient(135deg, var(--gold), var(--coral));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 50px 30px;
+      }
+
+      .promise-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .infinity-row {
+        flex-direction: column;
+        text-align: center;
+        border-radius: 25px;
+      }
+
+      .sacred-vow {
+        padding: 35px 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .intro-text::before {
+        font-size: 60px;
+        top: -20px;
+        left: -10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="floating-particles" id="particlesContainer"></div>
+
+  <div class="container">
+    <div class="decorative-corner corner-tl"></div>
+    <div class="decorative-corner corner-br"></div>
+
+    <div style="text-align: center;">
+      <span class="day-badge">Day 5 — Promise Day</span>
+    </div>
+
+    <h1>My Eternal Vows to You</h1>
+    <p class="date">February 11, 2026</p>
+
+    <svg class="promise-art" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f4e4b7;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#c9a959;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ffd4c8;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#ffb8a8;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#f4e4b7;stop-opacity:1" />
+        </linearGradient>
+        <filter id="softGlow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Left hand (reaching right) -->
+      <g transform="translate(80, 200)">
+        <!-- Forearm -->
+        <ellipse cx="0" cy="0" rx="35" ry="60" fill="url(#skinGrad)" transform="rotate(-30)"/>
+
+        <!-- Palm -->
+        <ellipse cx="50" cy="-20" rx="28" ry="38" fill="url(#skinGrad)"/>
+
+        <!-- Pinky finger extended -->
+        <ellipse cx="68" cy="-35" rx="8" ry="28" fill="url(#skinGrad)" transform="rotate(25 68 -35)"/>
+        <ellipse cx="75" cy="-50" rx="7" ry="18" fill="url(#skinGrad)" transform="rotate(20 75 -50)"/>
+
+        <!-- Ring on pinky -->
+        <ellipse cx="70" cy="-42" rx="9" ry="6" fill="url(#ringGrad)" filter="url(#softGlow)"/>
+        <ellipse cx="70" cy="-42" rx="7" ry="4" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+
+        <!-- Other fingers curled -->
+        <ellipse cx="55" cy="-45" rx="7" ry="20" fill="url(#skinGrad)" transform="rotate(-45 55 -45)"/>
+        <ellipse cx="48" cy="-48" rx="7" ry="22" fill="url(#skinGrad)" transform="rotate(-50 48 -48)"/>
+        <ellipse cx="40" cy="-45" rx="7" ry="20" fill="url(#skinGrad)" transform="rotate(-55 40 -45)"/>
+
+        <!-- Thumb -->
+        <ellipse cx="35" cy="-8" rx="10" ry="25" fill="url(#skinGrad)" transform="rotate(-80 35 -8)"/>
+      </g>
+
+      <!-- Right hand (reaching left) -->
+      <g transform="translate(420, 200)">
+        <!-- Forearm -->
+        <ellipse cx="0" cy="0" rx="35" ry="60" fill="url(#skinGrad)" transform="rotate(30)"/>
+
+        <!-- Palm -->
+        <ellipse cx="-50" cy="-20" rx="28" ry="38" fill="url(#skinGrad)"/>
+
+        <!-- Pinky finger extended -->
+        <ellipse cx="-68" cy="-35" rx="8" ry="28" fill="url(#skinGrad)" transform="rotate(-25 -68 -35)"/>
+        <ellipse cx="-75" cy="-50" rx="7" ry="18" fill="url(#skinGrad)" transform="rotate(-20 -75 -50)"/>
+
+        <!-- Ring on pinky -->
+        <ellipse cx="-70" cy="-42" rx="9" ry="6" fill="url(#ringGrad)" filter="url(#softGlow)"/>
+        <ellipse cx="-70" cy="-42" rx="7" ry="4" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+
+        <!-- Other fingers curled -->
+        <ellipse cx="-55" cy="-45" rx="7" ry="20" fill="url(#skinGrad)" transform="rotate(45 -55 -45)"/>
+        <ellipse cx="-48" cy="-48" rx="7" ry="22" fill="url(#skinGrad)" transform="rotate(50 -48 -48)"/>
+        <ellipse cx="-40" cy="-45" rx="7" ry="20" fill="url(#skinGrad)" transform="rotate(55 -40 -45)"/>
+
+        <!-- Thumb -->
+        <ellipse cx="-35" cy="-8" rx="10" ry="25" fill="url(#skinGrad)" transform="rotate(80 -35 -8)"/>
+      </g>
+
+      <!-- Infinity symbol connecting the pinkies -->
+      <path d="M 155 150 Q 200 120 250 150 Q 300 180 250 210 Q 200 180 155 150 Z M 250 150 Q 300 120 345 150 Q 390 180 345 210 Q 300 180 250 150 Z"
+            fill="none"
+            stroke="url(#goldGrad)"
+            stroke-width="6"
+            opacity="0.7"
+            filter="url(#softGlow)">
+        <animate attributeName="stroke-width" values="6;8;6" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.7;0.95;0.7" dur="3s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- Heart at center of infinity -->
+      <g transform="translate(250, 180)">
+        <path d="M 0 8 C 0 3 -3 0 -6 0 C -9 0 -12 3 -12 8 C -12 15 -6 20 0 26 C 6 20 12 15 12 8 C 12 3 9 0 6 0 C 3 0 0 3 0 8 Z"
+              fill="#ff6b9d"
+              opacity="0.9"
+              filter="url(#softGlow)"
+              transform="scale(2.5)">
+          <animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite"/>
+        </path>
+      </g>
+
+      <!-- Sparkles around the promise -->
+      <g opacity="0.8">
+        <circle cx="130" cy="120" r="3" fill="#ffd700">
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="370" cy="130" r="4" fill="#ffd700">
+          <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="180" cy="90" r="2.5" fill="#fff">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="320" cy="95" r="3.5" fill="#fff">
+          <animate attributeName="opacity" values="1;0.4;1" dur="2.2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="250" cy="80" r="3" fill="#e0c3fc">
+          <animate attributeName="opacity" values="0.4;1;0.4" dur="2.8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="140" cy="240" r="2" fill="#ffb8a8">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="2.3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="360" cy="250" r="3" fill="#ffb8a8">
+          <animate attributeName="opacity" values="1;0.5;1" dur="2.6s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+
+      <!-- Small decorative elements -->
+      <text x="110" y="300" font-size="28" fill="#d4af37" opacity="0.3" font-family="Alex Brush">∞</text>
+      <text x="360" y="305" font-size="28" fill="#d4af37" opacity="0.3" font-family="Alex Brush">∞</text>
+    </svg>
+
+    <p class="intro-text">
+      In the sacred space between our hearts, I make these promises to you — vows that transcend time, written in the language of forever, sealed with every beat of my heart.
+    </p>
+
+    <!-- Personalized message -->
+    <div style="text-align: center; margin: 50px 0 60px; opacity: 0; animation: fadeIn 1.5s ease-out 2s forwards;">
+      <p style="font-family: 'Great Vibes', cursive; font-size: clamp(42px, 6vw, 64px); color: #ff8fb8; margin: 0; line-height: 1.3;">
+        Happy Promise Day, Manno 🤝💖
+      </p>
+    </div>
+
+    <section class="vow-section">
+      <h2 class="section-title">The Promises I Hold Sacred</h2>
+
+      <div class="promise-grid">
+        <div class="promise-card">
+          <span class="promise-icon">🌅</span>
+          <h3 class="promise-title">To Choose You Every Dawn</h3>
+          <p class="promise-text">With every sunrise, I promise to choose you anew — not out of obligation, but from the deepest desire of my heart.</p>
+        </div>
+
+        <div class="promise-card">
+          <span class="promise-icon">💝</span>
+          <h3 class="promise-title">To Love Without Conditions</h3>
+          <p class="promise-text">Through every season of life, every mood, every challenge — my love for you remains unwavering and unconditional.</p>
+        </div>
+
+        <div class="promise-card">
+          <span class="promise-icon">👂</span>
+          <h3 class="promise-title">To Listen With My Soul</h3>
+          <p class="promise-text">I promise to truly hear you — not just your words, but the feelings behind them, creating space for your heart to speak freely.</p>
+        </div>
+
+        <div class="promise-card">
+          <span class="promise-icon">🌟</span>
+          <h3 class="promise-title">To Celebrate Your Light</h3>
+          <p class="promise-text">Your victories are mine to celebrate, your dreams are mine to support, your happiness is mine to cherish.</p>
+        </div>
+
+        <div class="promise-card">
+          <span class="promise-icon">🤗</span>
+          <h3 class="promise-title">To Be Your Safe Harbor</h3>
+          <p class="promise-text">In storms and struggles, I promise to be your shelter — offering strength when you feel weak, comfort when you need rest.</p>
+        </div>
+
+        <div class="promise-card">
+          <span class="promise-icon">🌱</span>
+          <h3 class="promise-title">To Grow Alongside You</h3>
+          <p class="promise-text">We will evolve together, learning and growing, building a love that deepens with each passing year.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="sacred-vow">
+      <p class="vow-text">
+        I promise to never stop trying, to <span class="vow-emphasis">show up</span> when it matters most,
+        to bring <span class="vow-emphasis">laughter</span> to your difficult days,
+        and to remind you that you are <span class="vow-emphasis">cherished</span>,
+        <span class="vow-emphasis">valued</span>, and <span class="vow-emphasis">deeply loved</span> —
+        today, tomorrow, and in all the beautiful tomorrows that await us.
+      </p>
+    </div>
+
+    <section class="infinity-promises">
+      <h2 class="section-title">Forever Means Forever</h2>
+
+      <div class="infinity-row">
+        <span class="infinity-symbol">∞</span>
+        <p class="infinity-promise-text">
+          <strong>Infinite patience</strong> — I will give you grace on hard days, understanding in moments of struggle, and time when you need space to breathe.
+        </p>
+      </div>
+
+      <div class="infinity-row">
+        <span class="infinity-symbol">∞</span>
+        <p class="infinity-promise-text">
+          <strong>Infinite effort</strong> — I will never take us for granted, always putting in the work to nurture what we have, to keep our connection strong and vibrant.
+        </p>
+      </div>
+
+      <div class="infinity-row">
+        <span class="infinity-symbol">∞</span>
+        <p class="infinity-promise-text">
+          <strong>Infinite devotion</strong> — My commitment to you isn't measured in days or years, but in the timeless depth of a love that knows no bounds.
+        </p>
+      </div>
+
+      <div class="infinity-row">
+        <span class="infinity-symbol">∞</span>
+        <p class="infinity-promise-text">
+          <strong>Infinite gratitude</strong> — For choosing me, for trusting me, for letting me be part of your story — I am forever thankful.
+        </p>
+      </div>
+    </section>
+
+    <div class="closing-seal">
+      <p class="seal-text">
+        These promises are not mere words — they are the foundation upon which I build our future.
+        Witnessed by the heavens, kept sacred in my heart.
+      </p>
+      <p class="signature">Forever Yours ♡</p>
+    </div>
+  </div>
+
+  <script>
+    const particlesContainer = document.getElementById('particlesContainer');
+    const particleSymbols = ['✨', '💫', '⭐', '💛', '💗', '🌟', '✦', '∞'];
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.textContent = particleSymbols[Math.floor(Math.random() * particleSymbols.length)];
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.top = Math.random() * 100 + 'vh';
+      particle.style.animationDelay = Math.random() * 8 + 's';
+      particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+      particlesContainer.appendChild(particle);
+    }
+
+    for (let i = 0; i < 30; i++) {
+      createParticle();
+    }
+  </script>
+</body>
+</html>
